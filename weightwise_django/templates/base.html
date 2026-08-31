@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}WeightWise Bariatric Program{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+  <div class="ww-topbar">
+    <img src="{% static 'img/logo.png' %}" alt="WeightWise Bariatric Program">
+    {% if user.is_authenticated %}
+    <div class="ww-topbar-right">
+      <span class="ww-hide-mobile">Signed in as <strong>{{ user.get_full_name|default:user.username }}</strong></span>
+      {% if user.patient_profile %}
+        <span class="ww-patient-id">{{ user.patient_profile.patient_id }}</span>
+      {% endif %}
+      <form method="post" action="{% url 'logout' %}" style="margin:0;">
+        {% csrf_token %}
+        <button type="submit" style="background:none;border:none;color:var(--ww-blue-dark);cursor:pointer;font-size:0.9rem;text-decoration:underline;padding:0;">Log out</button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+
+  {% block content %}{% endblock %}
+</body>
+</html>

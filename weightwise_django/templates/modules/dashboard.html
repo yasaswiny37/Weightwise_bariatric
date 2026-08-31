@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | WeightWise{% endblock %}
+{% block content %}
+<div class="ww-shell">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="ww-alert {% if message.tags %}{{ message.tags }}{% else %}info{% endif %}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="ww-welcome">
+    <h1>Welcome, {{ user.first_name|default:user.username }}</h1>
+    <p>Patient ID {{ patient.patient_id }} &middot; Your bariatric program dashboard</p>
+  </div>
+
+  <div class="ww-progress-wrap">
+    <div class="ww-progress-label">Program progress: {{ completed_count }} of {{ total_count }} modules completed</div>
+    <div class="ww-progress-bar">
+      <div class="ww-progress-fill" style="width: {{ percent_complete }}%;"></div>
+    </div>
+  </div>
+
+  <h2 class="ww-section-title">Your Modules</h2>
+  <div class="ww-module-grid">
+    {% for row in module_rows %}
+      <div class="ww-module-card">
+        <span class="ww-module-num {% if row.progress.completed %}done{% endif %}">{{ row.module.order }}</span>
+        <h3>{{ row.module.title }}</h3>
+        <p>{{ row.module.description|truncatewords:18 }}</p>
+        {% if row.progress.completed %}
+          <span class="ww-status-pill done">Completed</span>
+        {% elif row.progress.viewed %}
+          <span class="ww-status-pill progress">In progress</span>
+        {% else %}
+          <span class="ww-status-pill new">Not started</span>
+        {% endif %}
+        <a href="{% url 'module_detail' row.module.pk %}" class="ww-btn" style="margin-top:0.5rem;">
+          {% if row.progress.completed %}Review Module{% else %}Open Module{% endif %}
+        </a>
+      </div>
+    {% empty %}
+      <div class="ww-empty-note">No modules have been added yet. Please check back soon.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

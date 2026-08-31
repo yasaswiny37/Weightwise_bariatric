@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}{{ module.title }} | WeightWise{% endblock %}
+{% block content %}
+<div class="ww-shell">
+  <a href="{% url 'dashboard' %}" class="ww-back-link">&larr; Back to dashboard</a>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="ww-alert {% if message.tags %}{{ message.tags }}{% else %}info{% endif %}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="ww-card">
+    <div class="ww-module-detail-head">
+      <div>
+        <span class="ww-module-num {% if progress.completed %}done{% endif %}">{{ module.order }}</span>
+        <h1 style="display:inline; margin-left:0.5rem; font-size:1.3rem;">{{ module.title }}</h1>
+      </div>
+      {% if progress.completed %}
+        <span class="ww-status-pill done">Completed</span>
+      {% endif %}
+    </div>
+
+    {% if module.description %}
+      <p style="color:var(--ww-muted); margin-top:0.75rem;">{{ module.description }}</p>
+    {% endif %}
+
+    {% if module.video %}
+      <video class="ww-slide-embed" controls src="{{ module.video.url }}"></video>
+    {% elif module.slide_deck %}
+      {% if module.slide_deck.url|slice:"-4:" == "pptx" or module.slide_deck.url|slice:"-3:" == "ppt" %}
+        <div class="ww-empty-note" style="text-align:left;">
+          This module's content is a PowerPoint slide deck.
+          <div class="ww-actions">
+            <a href="{{ module.slide_deck.url }}" class="ww-btn secondary" download>Download Slide Deck</a>
+          </div>
+          <p style="font-size:0.8rem; margin-top:0.75rem;">
+            Note: inline preview of PPT files requires the deck to be hosted somewhere publicly
+            reachable (for embedding via Microsoft/Google viewers). On a local/private hospital
+            network, patients should download and open the file directly, as above.
+          </p>
+        </div>
+      {% else %}
+        <iframe class="ww-slide-embed" src="{{ module.slide_deck.url }}"></iframe>
+      {% endif %}
+    {% else %}
+      <div class="ww-empty-note">No content has been uploaded for this module yet. Please check back soon.</div>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="ww-actions">
+        {% if not progress.completed %}
+          <button type="submit" name="mark_complete" value="1" class="ww-btn secondary">Mark as Complete</button>
+        {% else %}
+          <span style="color:var(--ww-success); font-weight:600;">You've completed this module.</span>
+        {% endif %}
+        <a href="{% url 'dashboard' %}" class="ww-btn" style="background:#8a99a8;">Back to Dashboard</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

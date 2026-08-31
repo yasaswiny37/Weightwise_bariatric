@@ -1,0 +1,218 @@
+:root {
+  --ww-blue: #2f7fc1;
+  --ww-blue-dark: #1f5f96;
+  --ww-orange: #f2a022;
+  --ww-ink: #2b3440;
+  --ww-muted: #64748b;
+  --ww-bg: #eef4f9;
+  --ww-card: #ffffff;
+  --ww-border: #dbe6ee;
+  --ww-success: #2f9e58;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+  background: var(--ww-bg);
+  color: var(--ww-ink);
+}
+
+a { color: var(--ww-blue-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.ww-topbar {
+  background: var(--ww-card);
+  border-bottom: 1px solid var(--ww-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.5rem;
+}
+
+.ww-topbar img { height: 42px; display: block; }
+
+.ww-topbar-right { display: flex; align-items: center; gap: 1rem; font-size: 0.92rem; color: var(--ww-muted); }
+.ww-topbar-right .ww-patient-id { color: var(--ww-blue-dark); font-weight: 600; }
+
+.ww-shell {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.ww-auth-shell {
+  min-height: calc(100vh - 66px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.ww-card {
+  background: var(--ww-card);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(20, 40, 60, 0.06);
+}
+
+.ww-auth-card { width: 100%; max-width: 440px; }
+.ww-auth-card.wide { max-width: 620px; }
+
+.ww-auth-card h1 {
+  font-size: 1.4rem;
+  margin: 0 0 0.35rem;
+  color: var(--ww-blue-dark);
+}
+.ww-auth-card p.ww-sub { color: var(--ww-muted); margin: 0 0 1.5rem; font-size: 0.92rem; }
+
+.ww-field { margin-bottom: 1rem; }
+.ww-field label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; color: var(--ww-ink); }
+.ww-field input, .ww-field select {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--ww-border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fbfdff;
+}
+.ww-field input:focus, .ww-field select:focus {
+  outline: 2px solid var(--ww-blue);
+  outline-offset: 1px;
+  border-color: var(--ww-blue);
+}
+.ww-field .helptext { font-size: 0.78rem; color: var(--ww-muted); margin-top: 0.25rem; }
+.ww-field .errorlist { list-style: none; padding: 0; margin: 0.3rem 0 0; color: #c0392b; font-size: 0.82rem; }
+
+.ww-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+
+.ww-btn {
+  display: inline-block;
+  background: var(--ww-blue);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.3rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  width: 100%;
+  text-align: center;
+}
+.ww-btn:hover { background: var(--ww-blue-dark); text-decoration: none; }
+.ww-btn.secondary { background: var(--ww-orange); }
+.ww-btn.secondary:hover { background: #d98a12; }
+
+.ww-auth-switch { margin-top: 1.3rem; font-size: 0.88rem; text-align: center; color: var(--ww-muted); }
+
+.ww-alert {
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.ww-alert.success { background: #e7f6ec; color: var(--ww-success); border: 1px solid #bfe8cd; }
+.ww-alert.error { background: #fdecea; color: #b3261e; border: 1px solid #f6c6c2; }
+.ww-alert.info { background: #e9f2fb; color: var(--ww-blue-dark); border: 1px solid #cfe3f5; }
+
+.ww-welcome h1 { font-size: 1.55rem; margin: 0 0 0.15rem; }
+.ww-welcome p { color: var(--ww-muted); margin: 0 0 1.5rem; }
+
+.ww-progress-wrap { margin-bottom: 2rem; }
+.ww-progress-bar {
+  background: #dfeaf3;
+  border-radius: 20px;
+  height: 10px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.ww-progress-fill { background: var(--ww-orange); height: 100%; border-radius: 20px; }
+.ww-progress-label { font-size: 0.85rem; color: var(--ww-muted); }
+
+.ww-section-title {
+  font-size: 1.05rem;
+  color: var(--ww-blue-dark);
+  margin: 0 0 1rem;
+  border-bottom: 2px solid var(--ww-border);
+  padding-bottom: 0.5rem;
+}
+
+.ww-module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.ww-module-card {
+  background: var(--ww-card);
+  border: 1px solid var(--ww-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ww-module-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ww-blue);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.ww-module-num.done { background: var(--ww-success); }
+
+.ww-module-card h3 { margin: 0.3rem 0 0.1rem; font-size: 1rem; }
+.ww-module-card p { margin: 0; color: var(--ww-muted); font-size: 0.85rem; flex-grow: 1; }
+
+.ww-status-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  width: fit-content;
+}
+.ww-status-pill.done { background: #e7f6ec; color: var(--ww-success); }
+.ww-status-pill.progress { background: #fdf3e2; color: #a5670f; }
+.ww-status-pill.new { background: #eef2f6; color: var(--ww-muted); }
+
+.ww-module-detail-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+.ww-back-link { font-size: 0.88rem; margin-bottom: 1rem; display: inline-block; }
+
+.ww-slide-embed {
+  width: 100%;
+  height: 560px;
+  border: 1px solid var(--ww-border);
+  border-radius: 8px;
+  margin: 1.2rem 0;
+  background: #f4f7fa;
+}
+
+.ww-empty-note {
+  border: 1px dashed var(--ww-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--ww-muted);
+  margin: 1.2rem 0;
+}
+
+.ww-actions { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
+.ww-actions .ww-btn { width: auto; }
+.ww-actions form { margin: 0; }
+
+@media (max-width: 600px) {
+  .ww-row-2 { grid-template-columns: 1fr; }
+  .ww-topbar-right span.ww-hide-mobile { display: none; }
+}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Patient Login | WeightWise{% endblock %}
+{% block content %}
+<div class="ww-auth-shell">
+  <div class="ww-card ww-auth-card">
+    <h1>Patient Login</h1>
+    <p class="ww-sub">Sign in to access your WeightWise bariatric program dashboard.</p>
+
+    {% if form.errors %}
+      <div class="ww-alert error">Your username or password was incorrect. Please try again.</div>
+    {% endif %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="ww-alert {% if message.tags %}{{ message.tags }}{% else %}info{% endif %}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="ww-field">
+        <label for="id_username">Username</label>
+        <input type="text" name="username" id="id_username" required autofocus>
+      </div>
+      <div class="ww-field">
+        <label for="id_password">Password</label>
+        <input type="password" name="password" id="id_password" required>
+      </div>
+      <button type="submit" class="ww-btn">Log In</button>
+    </form>
+
+    <div class="ww-auth-switch">
+      New patient? <a href="{% url 'signup' %}">Create an account to get started</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
